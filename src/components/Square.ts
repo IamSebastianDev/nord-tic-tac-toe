@@ -2,13 +2,13 @@
 
 import { Grain, createComponent, on } from '@grainular/nord';
 import { char } from '../grains/char.grain';
-import { state } from '../grains/state.grain';
+import { gameState } from '../grains/game-state.grain';
 
 export type SquareProps = { field: Grain<null | 'O' | 'X'> };
 
 export const Square = createComponent<SquareProps>((html, { field }) => {
 	const handleClick = () => {
-		if (field() || state()) return;
+		if (field() || gameState().ended) return;
 		field.set(char());
 	};
 

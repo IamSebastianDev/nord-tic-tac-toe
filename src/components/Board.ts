@@ -1,9 +1,9 @@
 /** @format */
 
-import { createComponent, derived, each, on, when } from '@grainular/nord';
+import { createComponent, derived, each, get, on, when } from '@grainular/nord';
 import { Square } from './Square';
 import { resetSquares, squares } from '../grains/squares.grain';
-import { state } from '../grains/state.grain';
+import { gameState } from '../grains/game-state.grain';
 import { char } from '../grains/char.grain';
 import { winner } from '../grains/winner.grain';
 
@@ -20,7 +20,7 @@ export const Board = createComponent((html) => {
 		<div class="board">
 			${each(squares).as((field) => html`${Square({ field })}`)}
 		</div>
-		${when(state).then(
+		${when(get(gameState, 'ended')).then(
 			html`<button ${on('click', () => handleResetGameClick())}>
 				Restart Game
 			</button>`
