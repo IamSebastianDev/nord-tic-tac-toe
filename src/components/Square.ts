@@ -12,8 +12,6 @@ export const Square = createComponent<SquareProps>((html, { field }) => {
 		field.set(char());
 	};
 
-	char.subscribe(() => {});
-
 	return html`<button type="${field}" ${on('click', handleClick)}>
 		${field}
 	</button>`;
